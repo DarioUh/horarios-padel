@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horarios Cancha</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { color: #333; }
+        .horario { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 600px; margin: auto; }
+        .hora { padding: 15px; border-radius: 5px; color: white; font-size: 18px; }
+        .libre { background-color: green; }
+        .ocupado { background-color: red; }
+    </style>
+</head>
+<body>
+    <h1>Horarios de la Cancha</h1>
+    <div class="horario">
+        <div class="hora libre">10:00 - 11:00</div>
+        <div class="hora ocupado">11:00 - 12:00</div>
+        <div class="hora libre">12:00 - 13:00</div>
+        <div class="hora ocupado">13:00 - 14:00</div>
+    </div>
+</body>
+</html>
