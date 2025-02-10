@@ -15,11 +15,26 @@
 </head>
 <body>
     <h1>Horarios de la Cancha</h1>
-    <div class="horario">
-        <div class="hora libre">10:00 - 11:00</div>
-        <div class="hora ocupado">11:00 - 12:00</div>
-        <div class="hora libre">12:00 - 13:00</div>
-        <div class="hora ocupado">13:00 - 14:00</div>
-    </div>
+    <div class="horario" id="horarios"></div>
+<script>
+    const sheetID = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRgBjdK62VIfB6fFS8KZJvpttotxtoY7hrser5iMQwV_9LHzAOAADpQ0f-9R8OtehPpRtqWnieaNLko/pubhtml';  // Cambialo por el ID de tu hoja de Google Sheets
+    const sheetURL = `https://spreadsheets.google.com/feeds/list/${sheetID}/od6/public/values?alt=json`;
+
+    fetch(sheetURL)
+        .then(response => response.json())
+        .then(data => {
+            const horarios = data.feed.entry;
+            const horariosDiv = document.getElementById("horarios");
+            horarios.forEach(horario => {
+                const hora = horario.gsx$hora.$t;
+                const estado = horario.gsx$estado.$t.toLowerCase() === "ocupado" ? "ocupado" : "libre";
+                const horaDiv = document.createElement("div");
+                horaDiv.classList.add("hora", estado);
+                horaDiv.textContent = hora;
+                horariosDiv.appendChild(horaDiv);
+            });
+        })
+        .catch(error => console.error('Error al cargar los horarios:', error));
+</script>
 </body>
 </html>
