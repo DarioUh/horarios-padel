@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horarios Cancha</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        h1 { color: #333; }
-        .horario { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 600px; margin: auto; }
-        .hora { padding: 15px; border-radius: 5px; color: white; font-size: 18px; }
-        .libre { background-color: green; }
-        .ocupado { background-color: red; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horarios de la Cancha</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    h1 { color: #333; }
+    .hora { padding: 15px; border-radius: 5px; font-size: 18px; }
+    .libre { background-color: green; color: white; }
+    .ocupado { background-color: red; color: white; }
+  </style>
 </head>
 <body>
-    <h1>Horarios de la Cancha</h1>
-    <div class="horario" id="horarios"></div>
-<script>
-    const sheetID = '2PACX-1vRgBjdK62VIfB6fFS8KZJvpttotxtoY7hrser5iMQwV_9LHzAOAADpQ0f-9R8OtehPpRtqWnieaNLko';  
-    const apiKey = 'AIzaSyALmw_ATurEcMBVxeyOH9YPwdBIeU1_sl8';  // Reemplaza con tu API Key
-    const sheetURL = "https://script.google.com/macros/s/AKfycbyF3PPQ2OwV2Qi2WxNSHMlTE8kmeOi_QuTchBuvKK9O0giewKfEuLwnwnvbgOhEu1m1/exec";  // Reemplaza con la URL que obtuviste del paso anterior
+  <h1>Horarios de la Cancha</h1>
+  <div id="horarios"></div>
 
-fetch(sheetURL)
-  .then(response => response.json())
-  .then(data => {
-    const horariosDiv = document.getElementById("horarios");
-    data.forEach(horario => {
-      const horaDiv = document.createElement("div");
-      const estado = horario.estado.toLowerCase() === "ocupado" ? "ocupado" : "libre";
-      horaDiv.classList.add("hora", estado);
-      horaDiv.textContent = horario.hora;
-      horariosDiv.appendChild(horaDiv);
-    });
-  })
-  .catch(error => console.error('Error al cargar los horarios:', error));
-</script>
+  <script>
+    // Este script debe ser ejecutado con Google Apps Script
+    // Aquí se procesan los horarios (los datos se deben inyectar desde Google Apps Script)
+    function mostrarHorarios(horarios) {
+      var container = document.getElementById('horarios');
+      
+      horarios.forEach(function(horario) {
+        var horaDiv = document.createElement('div');
+        horaDiv.classList.add('hora', horario.estado);  // Clase para el estado (libre u ocupado)
+        horaDiv.textContent = horario.hora;  // Muestra la hora
+        container.appendChild(horaDiv);
+      });
+    }
+  </script>
 </body>
 </html>
