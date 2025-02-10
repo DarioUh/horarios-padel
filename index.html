@@ -19,23 +19,21 @@
 <script>
     const sheetID = '2PACX-1vRgBjdK62VIfB6fFS8KZJvpttotxtoY7hrser5iMQwV_9LHzAOAADpQ0f-9R8OtehPpRtqWnieaNLko';  
     const apiKey = 'AIzaSyALmw_ATurEcMBVxeyOH9YPwdBIeU1_sl8';  // Reemplaza con tu API Key
-    const sheetURL = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/Hoja1?key=${apiKey}`;
+    const sheetURL = "https://script.google.com/macros/s/AKfycbyF3PPQ2OwV2Qi2WxNSHMlTE8kmeOi_QuTchBuvKK9O0giewKfEuLwnwnvbgOhEu1m1/exec";  // Reemplaza con la URL que obtuviste del paso anterior
 
-    fetch(sheetURL)
-        .then(response => response.json())
-        .then(data => {
-            const horarios = data.values;  // Asegúrate de que esta parte sea correcta según la estructura de la hoja
-            const horariosDiv = document.getElementById("horarios");
-            horarios.forEach(horario => {
-                const hora = horario[0];  // El nombre de la hora estará en la primera columna
-                const estado = horario[1].toLowerCase() === "ocupado" ? "ocupado" : "libre";  // El estado está en la segunda columna
-                const horaDiv = document.createElement("div");
-                horaDiv.classList.add("hora", estado);
-                horaDiv.textContent = hora;
-                horariosDiv.appendChild(horaDiv);
-            });
-        })
-        .catch(error => console.error('Error al cargar los horarios:', error));
+fetch(sheetURL)
+  .then(response => response.json())
+  .then(data => {
+    const horariosDiv = document.getElementById("horarios");
+    data.forEach(horario => {
+      const horaDiv = document.createElement("div");
+      const estado = horario.estado.toLowerCase() === "ocupado" ? "ocupado" : "libre";
+      horaDiv.classList.add("hora", estado);
+      horaDiv.textContent = horario.hora;
+      horariosDiv.appendChild(horaDiv);
+    });
+  })
+  .catch(error => console.error('Error al cargar los horarios:', error));
 </script>
 </body>
 </html>
